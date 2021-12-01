@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+nltk = "==3.4"
+ipdb = "==0.13.4"
+torch = "==1.7.1"
+spacy = "==2.3.4"
+orjson = "==3.4.6"
+inflect = "==5.0.2"
+scispacy = "==0.3.0"
+termcolor = "==1.1.0"
+transformers = "==3.4.0"
+stop-words = "==2018.7.23"
+Cython = "==0.29.6"
+Unidecode = "==1.1.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"

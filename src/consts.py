@@ -52,11 +52,11 @@ DOCIDS_WITH_GOLD = {doc for doc, golds in STEM_DOC2REFS.items() if golds}  # Tas
 
 # huggingface LM
 GPT_TOKEN = 'Ġ'
-LM_NAME = DATA_CONFIG.lm_name
+LM_NAME = DATA_CONFIG.lm_name  # NOTE: ここを日本語のものに変更
 LM_NAME_SUFFIX = LM_NAME.split('/')[-1]
 DEVICE = utils.get_device(ARGS.gpu)
-LM_MODEL = transformers.RobertaModel.from_pretrained(LM_NAME).eval().to(DEVICE)
-LM_TOKENIZER = transformers.RobertaTokenizerFast.from_pretrained(LM_NAME)
+LM_MODEL = transformers.RobertaModel.from_pretrained(LM_NAME).eval().to(DEVICE)  # NOTE: ここを日本語のものに変更
+LM_TOKENIZER = transformers.RobertaTokenizerFast.from_pretrained(LM_NAME)  # NOTE: ここを日本語のものに変更
 print(f'[consts] Loading pretrained model: {LM_NAME} OK!')
 
 # html visualization

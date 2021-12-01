@@ -45,18 +45,18 @@ class Experiment:
             'wiki': WikiAnnotator(
                 use_cache=True,
                 preprocessor=self.train_preprocessor,
-                path_standard_phrase=self.data_config.path_phrase
+                path_standard_phrase=self.data_config.path_phrase  # NOTE: wikiをつかわないならいらない
             ),
             'core': CoreAnnotator(
                 use_cache=True,
-                preprocessor=self.train_preprocessor
+                preprocessor=self.train_preprocessor  # NOTE: デフォだとこっちが呼ばれる
             )
         }[self.config['annotator']]
 
         # model
         model_prefix = '.' + ARGS.model_prefix if ARGS.model_prefix else ''
         model_dir = self.dir_exp / f'model{model_prefix}'
-        if self.config['model'] == 'CNN':
+        if self.config['model'] == 'CNN':  # NOTE: デフォルトはこっち
             model = model_att.AttmapModel(
                 model_dir=model_dir,
                 max_num_subwords=consts.MAX_SUBWORD_GRAM,
@@ -129,7 +129,7 @@ class Experiment:
                 use_tqdm=True
             )
             evaluator = evaluate.SentEvaluator()
-            paths_gold = self.data_config.paths_tagging_human
+            paths_gold = self.data_config.paths_tagging_human  # NOTE: Gold Standardなので最悪なくてもいい
             print(f'Evaluate {path_decoded_doc2sents}')
             print(evaluator.evaluate(path_decoded_doc2sents, paths_doc2golds=paths_gold))
         else:
@@ -149,5 +149,5 @@ if __name__ == '__main__':
     exp = Experiment()
     exp.train()
     best_epoch = exp.select_best_epoch()
-    exp.predict(epoch=best_epoch, for_tagging=True)
+    # exp.predict(epoch=best_epoch, for_tagging=True)  # NOTE: for_tagging=Trueじゃなければ.taggingいらない
     exp.predict(epoch=best_epoch, for_tagging=False)
